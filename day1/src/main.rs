@@ -1,19 +1,19 @@
-fn line_nums(line: &str) -> (i64, i64) {
-    let mut parts = line.split_whitespace();
-    let a_num = parts.next().unwrap().parse::<i64>().unwrap();
-    let b_num = parts.next().unwrap().parse::<i64>().unwrap();
-    (a_num, b_num)
-}
-
-fn part_one(input: &'static str) -> i64 {
+fn lists(input: &'static str) -> (Vec<i64>, Vec<i64>) {
     let mut left = Vec::new();
-    let mut right: Vec<i64> = Vec::new();
+    let mut right = Vec::new();
     for line in input.lines() {
-        let (a, b) = line_nums(line);
+        let mut parts = line.split_whitespace();
+        let a = parts.next().unwrap().parse::<i64>().unwrap();
+        let b = parts.next().unwrap().parse::<i64>().unwrap();
         left.push(a);
         right.push(b);
     }
 
+    (left, right)
+}
+
+fn part_one(input: &'static str) -> i64 {
+    let (mut left, mut right) = lists(input);
     left.sort();
     right.sort();
 
@@ -24,15 +24,7 @@ fn part_one(input: &'static str) -> i64 {
 }
 
 fn part_two(input: &'static str) -> i64 {
-    let mut left = Vec::new();
-    let mut right = Vec::new();
-
-    for line in input.lines() {
-        let (a, b) = line_nums(line);
-        left.push(a);
-        right.push(b);
-    }
-
+    let (left, right) = lists(input);
     let mut counter = std::collections::HashMap::new();
     right.iter().for_each(|x| {
         *counter.entry(*x).or_insert(0) += 1;
