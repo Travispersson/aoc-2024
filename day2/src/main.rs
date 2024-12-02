@@ -33,7 +33,7 @@ fn part_one(input: &'static str) -> usize {
         .count()
 }
 
-fn part_two(input: &'static str) -> i32 {
+fn part_two(input: &'static str) -> usize {
     let mut safe = 0;
     let rows = get_rows(input);
     for row in rows {
