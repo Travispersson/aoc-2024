@@ -24,19 +24,15 @@ fn part_one(input: &'static str) -> usize {
 }
 
 fn part_two(input: &'static str) -> usize {
-    let mut safe = 0;
-    let rows = get_rows(input);
-    for row in rows {
-        for i in 0..row.len() {
-            let subset = ([&row[..i], &row[i + 1..]]).concat();
-            if safe_row(&subset) {
-                safe += 1;
-                break;
-            }
-        }
-    }
-
-    safe
+    get_rows(input)
+        .into_iter()
+        .filter(|row| {
+            (0..row.len()).any(|i| {
+                let subset = ([&row[..i], &row[i + 1..]]).concat();
+                safe_row(&subset)
+            })
+        })
+        .count()
 }
 
 fn main() {
