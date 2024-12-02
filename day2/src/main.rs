@@ -1,5 +1,3 @@
-use std::collections::HashSet;
-
 fn get_row(line: &str) -> Vec<i32> {
     line.split_whitespace()
         .map(|x| x.parse::<i32>().unwrap())
@@ -12,18 +10,10 @@ fn get_rows(input: &'static str) -> Vec<Vec<i32>> {
 
 fn safe_row(row: &[i32]) -> bool {
     let inc = row[1] - row[0] > 0;
-    let mut s = HashSet::new();
-
-    for i in 0..row.len() - 1 {
-        let v = row[i + 1] - row[i];
-        if inc {
-            s.insert(v);
-        } else {
-            s.insert(-v);
-        }
-    }
-
-    s.is_subset(&HashSet::from([1, 2, 3]))
+    row.windows(2).all(|w| {
+        let v = w[1] - w[0];
+        matches!(if inc { v } else { -v }, 1..=3)
+    })
 }
 
 fn part_one(input: &'static str) -> usize {
