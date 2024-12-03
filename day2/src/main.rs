@@ -11,8 +11,8 @@ fn get_rows(input: &'static str) -> Vec<Vec<i32>> {
 fn safe_row(row: &[i32]) -> bool {
     let inc = row[1] - row[0] > 0;
     row.windows(2).all(|w| {
-        let v = w[1] - w[0];
-        matches!(if inc { v } else { -v }, 1..=3)
+        let diff = w[1] - w[0];
+        matches!(if inc { diff } else { -diff }, 1..=3)
     })
 }
 
