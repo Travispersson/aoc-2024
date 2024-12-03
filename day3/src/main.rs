@@ -1,6 +1,6 @@
 fn part_one(input: &str) -> i32 {
     // regex that would match the following:
-    // mul(x,y) where x and y are any 3-digit integers and capute the values of x and y
+    // mul(x,y) where x and y are any 3-digit integers and capture x and y
     let re = regex::Regex::new(r"mul\((\d{1,3}),(\d{1,3})\)").unwrap();
 
     re.captures_iter(input)
@@ -14,7 +14,7 @@ fn part_one(input: &str) -> i32 {
 
 fn part_two(input: &str) -> i32 {
     // regex that would match the following:
-    // mul(x,y) where x and y are any 3-digit integers and capute the values of x and y
+    // mul(x,y) where x and y are any 3-digit integers and capure x and y
     // or don't()
     // or do()
     let re = regex::Regex::new(r"don't\(\)|do\(\)|mul\((\d{1,3}),(\d{1,3})\)").unwrap();
